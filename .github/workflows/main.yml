@@ -1,1 +1,36 @@
+name: CI run (BUILD) Test Suite Execution⚡
 
+
+on: 
+    push:
+        
+
+jobs:
+    Build-Cypress-TestSuite-AfterPush:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: 💻Checkout
+              uses: actions/checkout@v3
+
+            - name: 💿Install Node.js
+              uses: actions/setup-node@v3
+              with:
+                  node-version: 16
+
+            - name: 💿Yarn Setup
+              uses: DerYeger/yarn-setup-action@master
+              with:
+                  node-version: 16
+
+            - name: 🧬Install All Dependencies
+              run: |
+                  yarn
+
+
+            - name: 🧪Cypress Run Test Coverage in Chrome
+              uses: cypress-io/github-action@v4
+              with:
+                  browser: chrome
+                  command: | 
+                      yarn file cypress/e2e/ThinkingTester01-Login.cy.js
