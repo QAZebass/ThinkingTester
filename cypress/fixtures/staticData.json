@@ -1,0 +1,12 @@
+{
+    "LoginTitle": "Log In:",
+    "API":{
+        "response":{
+            "OKstatus": "Complete"
+        },
+        "endpoints":{
+            "fetchContacts": "https://thinking-tester-contact-list.herokuapp.com/contacts"
+        }
+        
+    }
+}
