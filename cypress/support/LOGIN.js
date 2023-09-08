@@ -3,7 +3,8 @@ class Login{
         loginTitle: ()=> cy.get('[class="main-content"] p').first(),
         emailInput: ()=> cy.get('[id="email"]'),
         passwordInput:()=> cy.get('[id="password"]'),
-        submitButton:()=> cy.get('[id="submit"]')
+        submitButton:()=> cy.get('[id="submit"]'),
+        signUpButton:()=> cy.get('[id="signup"]')
     }
     writeEmail(email){
         this.get.emailInput().invoke('attr', 'placeholder').should('equal', 'Email')
@@ -15,6 +16,9 @@ class Login{
     }
     clickSubmit(){
         this.get.submitButton().should('have.text', 'Submit').click()
+    }
+    clickSignUp(){
+        this.get.signUpButton().should('have.text', 'Sign up').click()
     }
 }
 export const login = new Login()

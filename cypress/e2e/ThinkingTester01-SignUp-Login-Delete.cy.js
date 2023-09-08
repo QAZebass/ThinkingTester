@@ -1,13 +1,14 @@
 import { faker } from '@faker-js/faker'
 import { apis } from '../support/APIs/APIs'
 import { login } from '../support/LOGIN'
+import { adduser } from '../support/ADDUSER'
 import data from '../fixtures/staticData.json'
 const firstname = faker.person.firstName()
 const lastname = faker.person.lastName()
 const mail = faker.internet.email()
 const password = faker.internet.password()
 
-describe('ThinkingTester01 | Log in',()=>{
+describe('ThinkingTester01 | Sign Up, Log In and Delete user',()=>{
    
     before('Creating User',()=>{
         cy.visit('/')
@@ -32,6 +33,25 @@ describe('ThinkingTester01 | Log in',()=>{
         login.clickSubmit()
         cy.wait('@request').then((response)=>{
             expect(response.response.statusCode).equal(200)
+            expect(response.state).equal(data.API.response.OKstatus)
+        })
+    })
+
+})
+describe('ThinkingTester01 | Sign Up, Log In and Delete user',()=>{
+    before('Precondition',()=>{
+        cy.visit('/')
+    })
+    it('ThinkingTester01 | TC2: Validate that the user can create a user with the "sign up" button',()=>{
+        cy.intercept('POST', data.API.endpoints.createUser).as('request')
+        login.clickSignUp()
+        adduser.writeFirstName(faker.person.firstName())
+        adduser.writeLastName(faker.person.lastName())
+        adduser.writeEmail(faker.internet.email())
+        adduser.writePassword(faker.internet.password())
+        adduser.clickSubmitButton()
+        cy.wait('@request').then((response)=>{
+            expect(response.response.statusCode).equal(201)
             expect(response.state).equal(data.API.response.OKstatus)
         })
     })

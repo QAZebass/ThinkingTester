@@ -5,7 +5,8 @@
             "OKstatus": "Complete"
         },
         "endpoints":{
-            "fetchContacts": "https://thinking-tester-contact-list.herokuapp.com/contacts"
+            "fetchContacts": "https://thinking-tester-contact-list.herokuapp.com/contacts",
+            "createUser": "https://thinking-tester-contact-list.herokuapp.com/users"
         }
         
     }
