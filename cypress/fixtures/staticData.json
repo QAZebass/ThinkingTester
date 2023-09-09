@@ -6,8 +6,12 @@
         },
         "endpoints":{
             "fetchContacts": "https://thinking-tester-contact-list.herokuapp.com/contacts",
-            "createUser": "https://thinking-tester-contact-list.herokuapp.com/users"
+            "createUser": "https://thinking-tester-contact-list.herokuapp.com/users",
+            "logout": "https://thinking-tester-contact-list.herokuapp.com/users/logout"
         }
-        
+    },
+    "URLs":{
+        "home": "https://thinking-tester-contact-list.herokuapp.com/",
+        "contactList": "https://thinking-tester-contact-list.herokuapp.com/contactList"
     }
 }

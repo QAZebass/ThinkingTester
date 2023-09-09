@@ -20,5 +20,10 @@ class Login{
     clickSignUp(){
         this.get.signUpButton().should('have.text', 'Sign up').click()
     }
+    logginIn(email, password){
+        this.get.emailInput().type(email)
+        this.get.passwordInput().type(password)
+        this.get.submitButton().click()
+    }
 }
 export const login = new Login()

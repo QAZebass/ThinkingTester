@@ -29,5 +29,12 @@ class AddUser{
         this.get.submitButton().should('have.text', 'Submit')
         this.get.submitButton().click()
     }
+    addingUser(firstname, lastname,email, password){
+        this.writeFirstName(firstname)
+        this.writeLastName(lastname)
+        this.writeEmail(email)
+        this.writePassword(password)
+        this.clickSubmitButton()
+    }
 }
 export const adduser = new AddUser()
