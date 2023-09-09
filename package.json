@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "cypress open",
-    "file": "cypress run --browser chrome --reporter cypress-multi-reporters --reporter-options configFile=jsconfig.json --record --key f72dc8bb-e5df-46a8-a131-4618ece6a9fb --spec cypress/e2e/test.cy.js"
+    "file": "cypress run --browser chrome --reporter cypress-multi-reporters --reporter-options configFile=jsconfig.json --record --key f72dc8bb-e5df-46a8-a131-4618ece6a9fb --spec cypress/e2e/ThinkingTester01-SignUp-Login-LogOut.cy.js"
   },
   "author": "Sebastian Avila",
   "license": "ISC",
