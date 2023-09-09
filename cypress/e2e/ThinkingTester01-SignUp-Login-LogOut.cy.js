@@ -48,7 +48,6 @@ describe('TT01 | Sign Up, Log In and Log Out',()=>{
     it('TT01 | TC3: Validate that the user can log out',()=>{
         const Firstname= firstName(), Lastname = lastName(), Email= email(), Pass= pass()
         apis.createUser(Firstname, Lastname, Email, Pass).then((response)=> {
-            Cypress.env('token', response.body.token)
             login.logginIn(Email, Pass )
             contactlist.clickLogOut()
             cy.url().should('equal', data.URLs.home)
