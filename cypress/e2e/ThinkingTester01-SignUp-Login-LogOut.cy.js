@@ -30,7 +30,6 @@ describe('TT01 | Sign Up, Log In and Log Out',()=>{
             })
         })
     })
-    
     it('TT01 | TC2: Validate that the user can log into the Thinking Tester contact list app',()=>{
         const Firstname= firstName(), Lastname = lastName(), Email= email(), Pass= pass()
         apis.createUser(Firstname, Lastname, Email, Pass).then((response)=> {
