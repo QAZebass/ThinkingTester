@@ -1,6 +1,7 @@
 import { apis } from "../support/APIs/APIs"
 import { faker } from "@faker-js/faker"
 import { contactlist } from "../support/ContactList"
+import { contactInfo } from "../support/ContactList"
 import { contactInformation, retrievedInformation } from "../support/ContactList"
 import data from "../fixtures/staticData.json"
 const firstname = faker.person.firstName()
@@ -28,21 +29,21 @@ describe('ThinkingTester02-Add-Update-Delete-Contact',()=>{
         cy.intercept('POST', data.API.endpoints.fetchContacts).as('request')
         cy.url().should('equal', data.URLs.contactList)
         contactlist.clickAddContact()
-        contactlist.writeFirstName(contactlist.contactInfo.firstname)
-        contactlist.writeLastName(contactlist.contactInfo.lastname)
-        contactlist.writeDateofBirth(contactlist.contactInfo.BirthDate)
-        contactlist.writeEmail(contactlist.contactInfo.email)
-        contactlist.writePhone(contactlist.contactInfo.phone)
-        contactlist.writeStreetAdress1(contactlist.contactInfo.address1)
-        contactlist.writeStreetAdress2(contactlist.contactInfo.address2)
-        contactlist.writeCity(contactlist.contactInfo.city)
-        contactlist.writeState(contactlist.contactInfo.state)
-        contactlist.writeZIPCode(contactlist.contactInfo.zip)
-        contactlist.writeCountry(contactlist.contactInfo.country)
+        contactlist.writeFirstName(contactInfo.firstname)
+        contactlist.writeLastName(contactInfo.lastname)
+        contactlist.writeDateofBirth(contactInfo.BirthDate)
+        contactlist.writeEmail(contactInfo.email)
+        contactlist.writePhone(contactInfo.phone)
+        contactlist.writeStreetAdress1(contactInfo.address1)
+        contactlist.writeStreetAdress2(contactInfo.address2)
+        contactlist.writeCity(contactInfo.city)
+        contactlist.writeState(contactInfo.state)
+        contactlist.writeZIPCode(contactInfo.zip)
+        contactlist.writeCountry(contactInfo.country)
         contactlist.clickSubmit()
         cy.wait('@request').then((response)=>{
             expect(response.response.statusCode).equal(201)})
-        cy.wait(2000)
+        cy.wait(1000)
         contactlist.getColumnInfo()
         cy.wrap(retrievedInformation).then(()=>{
             const keyWithSpaces = "City, State/Province, Postal Code"

@@ -12,6 +12,19 @@ function getRandomDate() {
   
     return `${year}-${month}-${day}`;
   }
+export const contactInfo={
+    firstname: faker.person.firstName(),
+    lastname: faker.person.lastName(),
+    BirthDate: birthdate= getRandomDate(),
+    email: faker.internet.email(),
+    phone: faker.phone.number('##########'),
+    address1: faker.location.streetAddress(),
+    address2: faker.location.secondaryAddress(),
+    city: faker.location.city(),
+    state : faker.location.state(),
+    zip : faker.location.zipCode(),
+    country : faker.location.country(),
+}
 class ContactList{
     get={
         addContactButton:()=> cy.get('[id="add-contact"]'),
@@ -108,19 +121,6 @@ class ContactList{
     clickSubmit(){
         this.get.submitButton().should('have.text', 'Submit')
         this.get.submitButton().click()
-    }
-    contactInfo={
-        firstname: faker.person.firstName(),
-        lastname: faker.person.lastName(),
-        BirthDate: birthdate= getRandomDate(),
-        email: faker.internet.email(),
-        phone: faker.phone.number('##########'),
-        address1: faker.location.streetAddress(),
-        address2: faker.location.secondaryAddress(),
-        city: faker.location.city(),
-        state : faker.location.state(),
-        zip : faker.location.zipCode(),
-        country : faker.location.country(),
     }
     getColumnInfo(){
         this.get.tableHeader().each((el)=>{
