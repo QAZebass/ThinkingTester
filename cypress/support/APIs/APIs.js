@@ -1,3 +1,4 @@
+
 class APIs{
     endpoint={
         createUser: 'https://thinking-tester-contact-list.herokuapp.com/users',
@@ -43,5 +44,6 @@ class APIs{
             return response
         })
     }
+    
 }
 export const apis = new APIs()
