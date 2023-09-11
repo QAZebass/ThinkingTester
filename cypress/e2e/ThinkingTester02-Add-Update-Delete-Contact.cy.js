@@ -1,6 +1,7 @@
 import { apis } from "../support/APIs/APIs"
 import { faker } from "@faker-js/faker"
-import { contactlist, retrievedInformation } from "../support/ContactList"
+import { contactlist } from "../support/ContactList"
+import { contactInformation, retrievedInformation } from "../support/ContactList"
 import data from "../fixtures/staticData.json"
 const firstname = faker.person.firstName()
 const lastname = faker.person.lastName()
