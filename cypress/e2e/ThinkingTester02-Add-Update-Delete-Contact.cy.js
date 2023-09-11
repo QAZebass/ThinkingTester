@@ -1,12 +1,12 @@
 import { apis } from "../support/APIs/APIs"
 import { faker } from "@faker-js/faker"
 import { contactlist, retrievedInformation } from "../support/ContactList"
-import data from "../fixtures/StaticData.json"
+import data from "../fixtures/staticData.json"
 const firstname = faker.person.firstName()
 const lastname = faker.person.lastName()
 const email = faker.internet.email()
 const password = faker.internet.password()
-import { contactInformation } from '../support/ContactList'
+
 
 
 let token; 
@@ -24,6 +24,7 @@ describe('ThinkingTester02-Add-Update-Delete-Contact',()=>{
         })
     })
     it('TT02 |TC1: Validate that the user can add a contact in the Add Contact Page',()=>{
+        cy.intercept('POST', data.API.endpoints.fetchContacts).as('request')
         cy.url().should('equal', data.URLs.contactList)
         contactlist.clickAddContact()
         contactlist.writeFirstName(contactlist.contactInfo.firstname)
@@ -38,6 +39,8 @@ describe('ThinkingTester02-Add-Update-Delete-Contact',()=>{
         contactlist.writeZIPCode(contactlist.contactInfo.zip)
         contactlist.writeCountry(contactlist.contactInfo.country)
         contactlist.clickSubmit()
+        cy.wait('@request').then((response)=>{
+            expect(response.response.statusCode).equal(201)})
         cy.wait(2000)
         contactlist.getColumnInfo()
         cy.wrap(retrievedInformation).then(()=>{
