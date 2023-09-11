@@ -33,4 +33,4 @@ jobs:
               with:
                   browser: chrome
                   command: | 
-                      yarn file cypress/e2e/ThinkingTester01-SignUp-Login-LogOut.cy.js
+                      yarn file cypress/e2e/ThinkingTester02-Add-Update-Delete-Contact.cy.js
