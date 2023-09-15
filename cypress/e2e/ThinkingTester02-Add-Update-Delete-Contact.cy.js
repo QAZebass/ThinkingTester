@@ -1,4 +1,5 @@
 import { apis } from "../support/APIs/APIs"
+import { contactdetails, fields } from "../support/ContactDetails"
 import { faker } from "@faker-js/faker"
 import { contactlist } from "../support/ContactList"
 import { contactInfo } from "../support/ContactList"
@@ -8,19 +9,19 @@ const firstname = faker.person.firstName()
 const lastname = faker.person.lastName()
 const email = faker.internet.email()
 const password = faker.internet.password()
-
-
-
 let token; 
 describe('ThinkingTester02-Add-Update-Delete-Contact',()=>{
-    before('Creating User, Log in, access to add contacts',()=>{
+    beforeEach('Creating User, Log in, access to add contacts',()=>{
         apis.createUser(firstname, lastname, email, password)
+        cy.clearAllLocalStorage()
+        cy.clearAllSessionStorage()
+        cy.clearAllCookies()
         cy.Login(email, password).then(()=>{
             token =Cypress.env('token')
         })
         cy.visit('/contactList')
     })
-    after('Deleting User',()=>{
+    afterEach('Deleting User',()=>{
         apis.deleteUser(Cypress.env('token')).then((response)=>{
             expect(response.status).equal(200)
         })
@@ -55,8 +56,16 @@ describe('ThinkingTester02-Add-Update-Delete-Contact',()=>{
             expect(retrievedInformation[keyWithSpaces]).equal(`${contactInformation.city} ${contactInformation.state} ${contactInformation.zipcode}`)
             expect(retrievedInformation.Country).equal(contactInformation.country)
         })
-            
-        
-
     })    
+    it.only('TT02 | TC2: Validate that the user can update a contact',()=>{
+        cy.url().should('equal', data.URLs.contactList)
+        contactlist.addContact(contactInfo.firstname,contactInfo.lastname,
+            contactInfo.BirthDate, contactInfo.email, contactInfo.phone,
+            contactInfo.address1, contactInfo.address2, contactInfo.city,
+            contactInfo.state, contactInfo.zip, contactInfo.country)
+        contactlist.clickAnyField()
+        contactdetails.clickEditContactButton()
+        cy.wrap(contactInformation)
+        contactdetails.editOneRandomContactField()
+    })
 })

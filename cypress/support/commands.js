@@ -13,12 +13,9 @@ import { apis } from "./APIs/APIs"
 // -- This is a parent command --
 // Cypress.Commands.add('login', (email, password) => { ... })
 Cypress.Commands.add('Login',(email, password) =>{
-    return cy.session([email, password],()=>{
         apis.logIn(email, password).then((response)=>{
-            window.localStorage.setItem('authToken', response.body.token)
             return Cypress.env('token', response.body.token)
         })
-    })
 })
 //
 // -- This is a child command --

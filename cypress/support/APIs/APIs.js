@@ -21,7 +21,7 @@ class APIs{
         })
     }
     logIn(email, password){
-        return cy.request({
+        return cy.api({
             'method': 'POST',
             'url': this.endpoint.logIn,
             'body':{

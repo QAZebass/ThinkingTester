@@ -138,7 +138,27 @@ class ContactList{
             }
         })      
     }
-
-
+    clickAnyField(){
+        this.get.columns().then(el=>{
+            const randomtd=Cypress._.random(0, el.length-1)
+            this.get.columns().eq(randomtd).click()
+        })
+    }
+    addContact(firstname,lastname, dateOfBirth, email, phoneNumber,
+        address1, address2, city, state, zipcode, country){
+        this.clickAddContact()
+        this.writeFirstName(firstname)
+        this.writeLastName(lastname)
+        this.writeDateofBirth(dateOfBirth)
+        this.writeEmail(email)
+        this.writePhone(phoneNumber)
+        this.writeStreetAdress1(address1)
+        this.writeStreetAdress2(address2)
+        this.writeCity(city)
+        this.writeState(state)
+        this.writeZIPCode(zipcode)
+        this.writeCountry(country)
+        this.clickSubmit()
+    }
 }
 export const contactlist = new ContactList()
