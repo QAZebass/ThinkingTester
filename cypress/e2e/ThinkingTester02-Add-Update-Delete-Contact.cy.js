@@ -32,14 +32,14 @@ describe('ThinkingTester02-Add-Update-Delete-Contact',()=>{
         contactlist.clickAddContact()
         contactlist.writeFirstName(contactInfo.firstname)
         contactlist.writeLastName(contactInfo.lastname)
-        contactlist.writeDateofBirth(contactInfo.BirthDate)
+        contactlist.writeDateofBirth(contactInfo.dateofbirth)
         contactlist.writeEmail(contactInfo.email)
         contactlist.writePhone(contactInfo.phone)
-        contactlist.writeStreetAdress1(contactInfo.address1)
-        contactlist.writeStreetAdress2(contactInfo.address2)
+        contactlist.writeStreetAdress1(contactInfo.streetaddress1)
+        contactlist.writeStreetAdress2(contactInfo.streetaddress2)
         contactlist.writeCity(contactInfo.city)
-        contactlist.writeState(contactInfo.state)
-        contactlist.writeZIPCode(contactInfo.zip)
+        contactlist.writeState(contactInfo.stateorprovince)
+        contactlist.writeZIPCode(contactInfo.postalcode)
         contactlist.writeCountry(contactInfo.country)
         contactlist.clickSubmit()
         cy.wait('@request').then((response)=>{
@@ -57,12 +57,12 @@ describe('ThinkingTester02-Add-Update-Delete-Contact',()=>{
             expect(retrievedInformation.Country).equal(contactInformation.country)
         })
     })    
-    it.only('TT02 | TC2: Validate that the user can update a contact',()=>{
+    it('TT02 | TC2: Validate that the user can update a contact',()=>{
         cy.url().should('equal', data.URLs.contactList)
         contactlist.addContact(contactInfo.firstname,contactInfo.lastname,
-            contactInfo.BirthDate, contactInfo.email, contactInfo.phone,
-            contactInfo.address1, contactInfo.address2, contactInfo.city,
-            contactInfo.state, contactInfo.zip, contactInfo.country)
+            contactInfo.dateofbirth, contactInfo.email, contactInfo.phone,
+            contactInfo.streetaddress1, contactInfo.streetaddress2, contactInfo.city,
+            contactInfo.stateorprovince, contactInfo.postalcode, contactInfo.country)
         contactlist.clickAnyField()
         contactdetails.clickEditContactButton()
         cy.wrap(contactInformation)

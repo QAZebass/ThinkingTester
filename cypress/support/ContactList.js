@@ -6,7 +6,7 @@ const th = []
 const td = []
 let birthdate;
 function getRandomDate() {
-    const year = Math.floor(Math.random() * (2023 - 1900 + 1)) + 1900; // Adjust the year range as needed
+    const year = Math.floor(Math.random() * (2023 - 1960 + 1)) + 1960; 
     const month = String(Math.floor(Math.random() * 12) + 1).padStart(2, '0');
     const day = String(Math.floor(Math.random() * 31) + 1).padStart(2, '0');
   
@@ -15,14 +15,14 @@ function getRandomDate() {
 export const contactInfo={
     firstname: faker.person.firstName(),
     lastname: faker.person.lastName(),
-    BirthDate: birthdate= getRandomDate(),
+    dateofbirth: birthdate= getRandomDate(),
     email: faker.internet.email(),
     phone: faker.phone.number('##########'),
-    address1: faker.location.streetAddress(),
-    address2: faker.location.secondaryAddress(),
+    streetaddress1: faker.location.streetAddress(),
+    streetaddress2: faker.location.secondaryAddress(),
     city: faker.location.city(),
-    state : faker.location.state(),
-    zip : faker.location.zipCode(),
+    stateorprovince : faker.location.state(),
+    postalcode : faker.location.zipCode(),
     country : faker.location.country(),
 }
 class ContactList{
