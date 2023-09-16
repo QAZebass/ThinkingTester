@@ -30,16 +30,16 @@ describe('ThinkingTester02-Add-Update-Delete-Contact',()=>{
         cy.intercept('POST', data.API.endpoints.fetchContacts).as('request')
         cy.url().should('equal', data.URLs.contactList)
         contactlist.clickAddContact()
-        contactlist.writeFirstName(contactInfo.firstname)
-        contactlist.writeLastName(contactInfo.lastname)
-        contactlist.writeDateofBirth(contactInfo.dateofbirth)
+        contactlist.writeFirstName(contactInfo.firstName)
+        contactlist.writeLastName(contactInfo.lastName)
+        contactlist.writeDateofBirth(contactInfo.dateOfBirth)
         contactlist.writeEmail(contactInfo.email)
         contactlist.writePhone(contactInfo.phone)
-        contactlist.writeStreetAdress1(contactInfo.streetaddress1)
-        contactlist.writeStreetAdress2(contactInfo.streetaddress2)
+        contactlist.writeStreetAdress1(contactInfo.streetAddress1)
+        contactlist.writeStreetAdress2(contactInfo.streetAddress2)
         contactlist.writeCity(contactInfo.city)
-        contactlist.writeState(contactInfo.stateorprovince)
-        contactlist.writeZIPCode(contactInfo.postalcode)
+        contactlist.writeState(contactInfo.stateOrProvince)
+        contactlist.writeZIPCode(contactInfo.postalCode)
         contactlist.writeCountry(contactInfo.country)
         contactlist.clickSubmit()
         cy.wait('@request').then((response)=>{
@@ -59,10 +59,10 @@ describe('ThinkingTester02-Add-Update-Delete-Contact',()=>{
     })    
     it.only('TT02 | TC2: Validate that the user can update a contact',()=>{
         cy.url().should('equal', data.URLs.contactList)
-        contactlist.addContact(contactInfo.firstname,contactInfo.lastname,
-            contactInfo.dateofbirth, contactInfo.email, contactInfo.phone,
-            contactInfo.streetaddress1, contactInfo.streetaddress2, contactInfo.city,
-            contactInfo.stateorprovince, contactInfo.postalcode, contactInfo.country)
+        contactlist.addContact(contactInfo.firstName,contactInfo.lastName,
+            contactInfo.dateOfBirth, contactInfo.email, contactInfo.phone,
+            contactInfo.streetAddress1, contactInfo.streetAddress2, contactInfo.city,
+            contactInfo.stateOrProvince, contactInfo.postalCode, contactInfo.country)
         contactlist.clickAnyField()
         contactdetails.clickEditContactButton()
         cy.wrap(contactInformation)

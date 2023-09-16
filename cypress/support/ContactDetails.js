@@ -1,5 +1,7 @@
 
 const newContactInfoArray=[]
+const oldContactInfoArray=[]
+import { contactInfo } from "./ContactList";
 import { faker } from "@faker-js/faker";
 let birthdate;
 function getRandomDate() {
@@ -9,17 +11,17 @@ function getRandomDate() {
   
     return `${year}-${month}-${day}`;
   }
-export const contactInfo={
+export const contactInfo2={
     firstname: faker.person.firstName(),
     lastname: faker.person.lastName(),
-    dateofbirth: birthdate= getRandomDate(),
+    dateOfBirth: birthdate= getRandomDate(),
     email: faker.internet.email(),
     phone: faker.phone.number('##########'),
-    streetaddress1: faker.location.streetAddress(),
-    streetaddress2: faker.location.secondaryAddress(),
+    streetAddress1: faker.location.streetAddress(),
+    streetAddress2: faker.location.secondaryAddress(),
     city: faker.location.city(),
-    stateorprovince : faker.location.state(),
-    postalcode : faker.location.zipCode(),
+    stateOrProvince : faker.location.state(),
+    postalCode : faker.location.zipCode(),
     country : faker.location.country(),
 }
 class ContactDetails{
@@ -33,8 +35,9 @@ class ContactDetails{
         this.get.editContactButton().should('have.text','Edit Contact').click()
     }
     editOneRandomContactField(){
-        for (const key in contactInfo){
-            newContactInfoArray.push([key, contactInfo[key]])
+        for (const key in contactInfo2, contactInfo){
+            newContactInfoArray.push([key, contactInfo2[key]])
+            oldContactInfoArray.push([key, contactInfo[key]])
         }
         this.get.contactFields().then(field=>{
             const randomNumber = Cypress._.random(0, field.length -1)
@@ -43,8 +46,11 @@ class ContactDetails{
             })
             this.get.inputContainer().eq(randomNumber).within(()=>{
                 this.get.input().type(newContactInfoArray[randomNumber][1])
+                cy.log(`**${oldContactInfoArray[randomNumber][0]} has been changed!**`)
+                expect(oldContactInfoArray[randomNumber][1]).not.equal(newContactInfoArray[randomNumber][1])
         })
         })
+
     }
 }
 

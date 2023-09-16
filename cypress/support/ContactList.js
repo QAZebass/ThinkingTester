@@ -13,16 +13,16 @@ function getRandomDate() {
     return `${year}-${month}-${day}`;
   }
 export const contactInfo={
-    firstname: faker.person.firstName(),
-    lastname: faker.person.lastName(),
-    dateofbirth: birthdate= getRandomDate(),
+    firstName: faker.person.firstName(),
+    lastName: faker.person.lastName(),
+    dateOfBirth: birthdate= getRandomDate(),
     email: faker.internet.email(),
     phone: faker.phone.number('##########'),
-    streetaddress1: faker.location.streetAddress(),
-    streetaddress2: faker.location.secondaryAddress(),
+    streetAddress1: faker.location.streetAddress(),
+    streetAddress2: faker.location.secondaryAddress(),
     city: faker.location.city(),
-    stateorprovince : faker.location.state(),
-    postalcode : faker.location.zipCode(),
+    stateOrProvince : faker.location.state(),
+    postalCode : faker.location.zipCode(),
     country : faker.location.country(),
 }
 class ContactList{
