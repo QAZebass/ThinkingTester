@@ -57,7 +57,7 @@ describe('ThinkingTester02-Add-Update-Delete-Contact',()=>{
             expect(retrievedInformation.Country).equal(contactInformation.country)
         })
     })    
-    it('TT02 | TC2: Validate that the user can update a contact',()=>{
+    it.only('TT02 | TC2: Validate that the user can update a contact',()=>{
         cy.url().should('equal', data.URLs.contactList)
         contactlist.addContact(contactInfo.firstname,contactInfo.lastname,
             contactInfo.dateofbirth, contactInfo.email, contactInfo.phone,

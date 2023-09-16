@@ -1,6 +1,27 @@
-export const fields=[]
-import { contactInfo } from "./ContactList"
-const contactInfoArray=[]
+
+const newContactInfoArray=[]
+import { faker } from "@faker-js/faker";
+let birthdate;
+function getRandomDate() {
+    const year = Math.floor(Math.random() * (2023 - 1960 + 1)) + 1960; 
+    const month = String(Math.floor(Math.random() * 12) + 1).padStart(2, '0');
+    const day = String(Math.floor(Math.random() * 31) + 1).padStart(2, '0');
+  
+    return `${year}-${month}-${day}`;
+  }
+export const contactInfo={
+    firstname: faker.person.firstName(),
+    lastname: faker.person.lastName(),
+    dateofbirth: birthdate= getRandomDate(),
+    email: faker.internet.email(),
+    phone: faker.phone.number('##########'),
+    streetaddress1: faker.location.streetAddress(),
+    streetaddress2: faker.location.secondaryAddress(),
+    city: faker.location.city(),
+    stateorprovince : faker.location.state(),
+    postalcode : faker.location.zipCode(),
+    country : faker.location.country(),
+}
 class ContactDetails{
     get={
         editContactButton:()=> cy.get('[id="edit-contact"]'),
@@ -12,31 +33,17 @@ class ContactDetails{
         this.get.editContactButton().should('have.text','Edit Contact').click()
     }
     editOneRandomContactField(){
-        this.get.contactFields().each(field=>{
-                fields.push(field.text().trim().replace(':','').toLowerCase().split(' ').join(''))
-        })
-
         for (const key in contactInfo){
-            contactInfoArray.push([key, contactInfo[key]])
+            newContactInfoArray.push([key, contactInfo[key]])
         }
-        const arrayOfcontactInfo= Cypress._.map(contactInfoArray, keys =>{
-            return keys[0].toLowerCase()
-        })
-        cy.log(arrayOfcontactInfo)
-        cy.log(fields)
-    
         this.get.contactFields().then(field=>{
             const randomNumber = Cypress._.random(0, field.length -1)
-            if(fields[randomNumber]===arrayOfcontactInfo[randomNumber]){
-                cy.log(fields[randomNumber])
-                cy.log(arrayOfcontactInfo[randomNumber])
-                this.get.inputContainer().eq(randomNumber).within(()=>{
-                    this.get.input().clear()
-                })
-                this.get.inputContainer().eq(randomNumber).within(()=>{
-                    this.get.input().type(contactInfo[arrayOfcontactInfo[randomNumber]])
-                })
-            } 
+            this.get.inputContainer().eq(randomNumber).within(()=>{
+                this.get.input().clear()
+            })
+            this.get.inputContainer().eq(randomNumber).within(()=>{
+                this.get.input().type(newContactInfoArray[randomNumber][1])
+        })
         })
     }
 }
