@@ -39,18 +39,20 @@ class ContactDetails{
             newContactInfoArray.push([key, contactInfo2[key]])
             oldContactInfoArray.push([key, contactInfo[key]])
         }
-        this.get.contactFields().then(field=>{
+        return this.get.contactFields().then(field=>{
             const randomNumber = Cypress._.random(0, field.length -1)
             this.get.inputContainer().eq(randomNumber).within(()=>{
                 this.get.input().clear()
-            })
-            this.get.inputContainer().eq(randomNumber).within(()=>{
-                this.get.input().type(newContactInfoArray[randomNumber][1])
-                cy.log(`**${oldContactInfoArray[randomNumber][0]} has been changed!**`)
-                expect(oldContactInfoArray[randomNumber][1]).not.equal(newContactInfoArray[randomNumber][1])
+                Cypress.env('randomNumber', randomNumber)
+            })   
+        }).then(()=>{
+            this.get.inputContainer().eq(Cypress.env('randomNumber')).within(()=>{
+                this.get.input().type(newContactInfoArray[Cypress.env('randomNumber')][1])
+                cy.log(`**${oldContactInfoArray[Cypress.env('randomNumber')][0]} has been changed!**`)      
+        }).then(()=>{
+            return Cypress.env('oldInfo',oldContactInfoArray[Cypress.env('randomNumber')][1]), Cypress.env('newInfo',newContactInfoArray[Cypress.env('randomNumber')][1]) 
         })
         })
-
     }
 }
 

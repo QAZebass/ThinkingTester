@@ -66,6 +66,8 @@ describe('ThinkingTester02-Add-Update-Delete-Contact',()=>{
         contactlist.clickAnyField()
         contactdetails.clickEditContactButton()
         cy.wrap(contactInformation)
-        contactdetails.editOneRandomContactField()
+        contactdetails.editOneRandomContactField().then(()=>{
+            expect(Cypress.env('oldInfo')).not.equal(Cypress.env('newInfo'))
+        })
     })
 })
