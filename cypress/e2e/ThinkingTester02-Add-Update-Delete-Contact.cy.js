@@ -57,7 +57,7 @@ describe('ThinkingTester02-Add-Update-Delete-Contact',()=>{
             expect(retrievedInformation.Country).equal(contactInformation.country)
         })
     })    
-    it.only('TT02 | TC2: Validate that the user can update a contact',()=>{
+    it('TT02 | TC2: Validate that the user can update a contact',()=>{
         cy.url().should('equal', data.URLs.contactList)
         contactlist.addContact(contactInfo.firstName,contactInfo.lastName,
             contactInfo.dateOfBirth, contactInfo.email, contactInfo.phone,
@@ -65,7 +65,6 @@ describe('ThinkingTester02-Add-Update-Delete-Contact',()=>{
             contactInfo.stateOrProvince, contactInfo.postalCode, contactInfo.country)
         contactlist.clickAnyField()
         contactdetails.clickEditContactButton()
-        cy.wrap(contactInformation)
         contactdetails.editOneRandomContactField().then(()=>{
             expect(Cypress.env('oldInfo')).not.equal(Cypress.env('newInfo'))
         })

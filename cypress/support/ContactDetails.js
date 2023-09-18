@@ -5,7 +5,7 @@ import { contactInfo } from "./ContactList";
 import { faker } from "@faker-js/faker";
 let birthdate;
 function getRandomDate() {
-    const year = Math.floor(Math.random() * (2023 - 1960 + 1)) + 1960; 
+    const year = Math.floor(Math.random() * (2023 - 1970 + 1)) + 1970; 
     const month = String(Math.floor(Math.random() * 12) + 1).padStart(2, '0');
     const day = String(Math.floor(Math.random() * 31) + 1).padStart(2, '0');
   
